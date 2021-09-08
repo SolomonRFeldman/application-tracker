@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { postRequest } from '../../apiRequests'
 
 export default function SignInForm() {
+  const [formData, setFormData] = useState({ email: '', password: '' })
+  const handleChange = event => setFormData({ ...formData, [event.target.id]: event.target.value })
 
   const handleSubmit = event => {
     event.preventDefault()
+
+    return postRequest('/signin', { user: formData })
   }
 
   return(
     <form onSubmit={handleSubmit}>
-      <label for={"email"}> Email </label>
-      <input id={"email"} type={"email"} />
+      <label htmlFor={"email"}> Email </label>
+      <input id={"email"} type={"email"} onChange={handleChange} />
       <br />
-      <label for={"password"}> Password </label>
-      <input id={"password"} type={"password"} />
+      <label htmlFor={"password"}> Password </label>
+      <input id={"password"} type={"password"} onChange={handleChange} />
       <br />
       <input type="submit" value="Sign In" />
     </form>
