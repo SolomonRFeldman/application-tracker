@@ -32,8 +32,8 @@ export default function SignInForm({setCurrentUser}) {
       <input id={"password_confirmation"} type={"password"} onChange={handleChange} />
 
       <br />
-      
-      <input type="submit" value="Sign In" />
+
+      <input type="submit" value="Sign Up" />
     </form>
   )
 }
