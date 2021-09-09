@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { postRequest } from '../../apiRequests'
 
-export default function SignInForm() {
+export default function SignInForm({setCurrentUser}) {
   const [formData, setFormData] = useState({ email: '', password: '' })
   const handleChange = event => setFormData({ ...formData, [event.target.id]: event.target.value })
 
   const handleSubmit = event => {
     event.preventDefault()
 
-    return postRequest('/signin', { user: formData })
+    return postRequest('/signin', { user: formData }).then(({user}) => setCurrentUser(user)) 
   }
 
   return(

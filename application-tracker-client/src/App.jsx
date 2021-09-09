@@ -1,12 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import SignInForm from './components/Session/SignInForm';
+import SessionBanner from './components/Session/SessionBanner';
 
 function App() {
   return (
     <div className="App">
-      <SignInForm />
+      <SessionBanner />
     </div>
   );
 }
