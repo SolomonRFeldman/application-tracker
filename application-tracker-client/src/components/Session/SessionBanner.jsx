@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getRequest } from '../../apiRequests'
 import CurrentUserBanner from './CurrentUserBanner'
-import SignInForm from './SignInForm'
+import SignInBanner from './SignInBanner'
 
 export default function SessionBanner() {
   const [currentUser, setCurrentUser] = useState()
@@ -13,6 +13,6 @@ export default function SessionBanner() {
   return(
     currentUser ?
       <CurrentUserBanner currentUser={currentUser} setCurrentUser={setCurrentUser} /> :
-      <SignInForm setCurrentUser={setCurrentUser} />
+      <SignInBanner setCurrentUser={setCurrentUser} />
   )
 }
