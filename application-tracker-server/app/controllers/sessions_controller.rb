@@ -1,19 +1,30 @@
 class SessionsController < ApplicationController
 
   def create
-    cookies.signed[:user] = { value: { name: params[:user][:email] }, expires: 1.day, httponly: true }
-    # cookies.delete :user
-    puts cookies.signed[:user]
-    render json: { user: cookies.signed[:user] }
+    if user = User.authenticate(email: session_params[:email], password: session_params[:password])
+      cookies.signed[:user] = cookie_hash(user)
+      render json: { user: user.session_info }
+    else
+      render json: { authentication_error: true }, status: 400
+    end
   end
 
   def destroy
-    puts cookies.delete(:user)
+    cookies.delete(:user)
     render status: 200
   end
 
   def show
-    render json: { user: cookies.signed[:user] }
+    user = User.find_by(cookies.signed[:user]) 
+    user ? 
+      render(json: { user: user.session_info }) :
+      render(json: { authentication_error: true }, status: 400)
+  end
+
+  private
+  
+  def session_params
+    params.require(:user).permit(:email, :password)
   end
 
 end

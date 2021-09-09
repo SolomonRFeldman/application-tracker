@@ -9,5 +9,14 @@ class User < ApplicationRecord
   def session_info
     self.attributes.slice('username')
   end
+  
+  class << self
+  
+    def authenticate(email: nil, password: nil)
+      user = self.find_by(email: email)
+      user if user && user.authenticate(password)
+    end
+
+  end
 
 end

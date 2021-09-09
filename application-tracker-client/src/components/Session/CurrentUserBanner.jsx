@@ -5,7 +5,7 @@ export default function CurrentUserBanner({currentUser, setCurrentUser}) {
 
   return(
     <>
-      <h1>Welcome {currentUser.name}</h1>
+      <h1>Welcome {currentUser.username}</h1>
       <SignOutButton setCurrentUser={setCurrentUser} />
     </>
   )
