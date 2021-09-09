@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def create
-    cookies.signed[:user] = { value: { name: params[:user][:email] }, httponly: true }
+    cookies.signed[:user] = { value: { name: params[:user][:email] }, expires: 1.day, httponly: true }
     # cookies.delete :user
     puts cookies.signed[:user]
     render json: { user: cookies.signed[:user] }
