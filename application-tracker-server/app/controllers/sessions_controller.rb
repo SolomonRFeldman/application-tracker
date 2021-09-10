@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def show
-    user = User.find_by(cookies.signed[:user]) 
+    user = cookies.signed[:user] && User.find(cookies.signed[:user][:id])
     user ? 
       render(json: { user: user.session_info }) :
       render(json: { authentication_error: true }, status: 400)
