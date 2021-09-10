@@ -1,11 +1,10 @@
-import SignInForm from "./SignInForm";
-import SignUpForm from "./SignUpForm";
+import { ButtonToolbar } from "react-bootstrap";
+import SignInButton from "./SignInButton";
 
-export default function SignInBanner({setCurrentUser}) {
+export default function SignInBanner({className, setCurrentUser}) {
   return(
-		<>
-			<SignInForm setCurrentUser={setCurrentUser} />
-			<SignUpForm setCurrentUser={setCurrentUser} />
-		</>
+		<ButtonToolbar className={className}>
+			<SignInButton variant='secondary' setCurrentUser={setCurrentUser} />
+		</ButtonToolbar>
 	)
 }
