@@ -5,7 +5,7 @@ export default function SignOutButton({setCurrentUser}) {
   const handleClick = () => {
     console.log('click')
     fetch(API_ENDPOINT + '/signout', { method: "DELETE" })
-      .then(resp => resp.status == 200 ? setCurrentUser() : null)
+      .then(resp => resp.status === 200 ? setCurrentUser() : null)
   }
 
   return(

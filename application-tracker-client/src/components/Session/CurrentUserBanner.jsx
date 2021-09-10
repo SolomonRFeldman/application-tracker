@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import SignOutButton from './SignOutButton'
 
 export default function CurrentUserBanner({currentUser, setCurrentUser}) {
