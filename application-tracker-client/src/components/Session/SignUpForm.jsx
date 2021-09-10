@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { Form, Modal, Button } from 'react-bootstrap'
 import { postRequest } from '../../apiRequests'
 
-export default function SignInForm({setCurrentUser}) {
+export default function SignUpForm({ show, handleClose, setCurrentUser }) {
   const [formData, setFormData] = useState({ email: '', password: '' })
   const handleChange = event => setFormData({ ...formData, [event.target.id]: event.target.value })
 
@@ -12,28 +13,33 @@ export default function SignInForm({setCurrentUser}) {
   }
 
   return(
-    <form onSubmit={handleSubmit}>
-      <label htmlFor={"username"}> Username </label>
-      <input id={"username"} type={"text"} onChange={handleChange} />
-
-      <br />
-
-      <label htmlFor={"email"}> Email </label>
-      <input id={"email"} type={"email"} onChange={handleChange} />
-       
-      <br />
-
-      <label htmlFor={"password"}> Password </label>
-      <input id={"password"} type={"password"} onChange={handleChange} />
-
-      <br />
-
-      <label htmlFor={"password_confirmation"}> Password Confirmation </label>
-      <input id={"password_confirmation"} type={"password"} onChange={handleChange} />
-
-      <br />
-
-      <input type="submit" value="Sign Up" />
-    </form>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Sign Up</Modal.Title>
+      </Modal.Header>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          <Form.Group controlId='username'>
+            <Form.Label>Username</Form.Label>
+            <Form.Control placeholder='Username' type='text' onChange={handleChange} value={formData.username} />
+          </Form.Group>
+          <Form.Group controlId='email'>
+            <Form.Label>Email</Form.Label>
+            <Form.Control placeholder='Email' type='email' onChange={handleChange} value={formData.email} />
+          </Form.Group>
+          <Form.Group controlId='password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control placeholder='Password' type='password' onChange={handleChange} value={formData.password} />
+          </Form.Group>
+          <Form.Group controlId='password_confirmation'>
+            <Form.Label>Password Confirmation</Form.Label>
+            <Form.Control placeholder='Password Confirmation' type='password' onChange={handleChange} value={formData.password_confirmation} />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button aria-label='Submit Sign Up' type='submit'>Sign Up</Button>
+        </Modal.Footer>
+      </Form>
+    </Modal>
   )
 }
