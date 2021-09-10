@@ -1,7 +1,7 @@
-import React from 'react'
+import { Button } from 'react-bootstrap'
 import { API_ENDPOINT } from '../../apiRequests'
 
-export default function SignOutButton({setCurrentUser}) {
+export default function SignOutButton({className, varient, setCurrentUser}) {
   const handleClick = () => {
     console.log('click')
     fetch(API_ENDPOINT + '/signout', { method: "DELETE" })
@@ -9,6 +9,6 @@ export default function SignOutButton({setCurrentUser}) {
   }
 
   return(
-    <input type="submit" value="Sign Out" onClick={handleClick} />
+    <Button className={className} aria-label='Sign Out' variant={varient} onClick={handleClick}>Log Out</Button>
   )
 }
