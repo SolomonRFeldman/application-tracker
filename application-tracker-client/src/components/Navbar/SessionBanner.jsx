@@ -4,7 +4,7 @@ import NavbarBody from './NavbarBody'
 import SignInBanner from '../Session/SignInBanner'
 
 export default function SessionBanner() {
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState()
 
   useEffect(() => {
     getRequest('/current').then(({user}) => setCurrentUser(user))
