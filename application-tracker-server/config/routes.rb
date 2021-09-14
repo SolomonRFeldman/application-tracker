@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get '/current' => 'sessions#show'
 
     resources :users, only: [] do
-      resources :applications, only: [:create]
+      resources :applications, only: [:index, :create]
     end
   end
 end
