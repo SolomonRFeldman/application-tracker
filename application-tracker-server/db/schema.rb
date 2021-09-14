@@ -10,11 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_04_175849) do
+ActiveRecord::Schema.define(version: 2021_09_10_173449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_enum :status, [
+    "accepted",
+    "declined",
+    "pending",
+  ], force: :cascade
+
+  create_table "applications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.citext "organization_name", null: false
+    t.citext "purpose", null: false
+    t.datetime "date_applied"
+    t.text "url"
+    t.enum "status", default: "pending", null: false, enum_name: "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.citext "username", null: false
