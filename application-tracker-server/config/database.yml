@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  host: <%= ENV.fetch("DB_HOST") { 'db' } %>
   database: application_tracker_server_production
-  username: application_tracker_server
-  password: <%= ENV['APPLICATION_TRACKER_SERVER_DATABASE_PASSWORD'] %>
+  username: <%= ENV.fetch("DB_USER") { 'postgres' } %>
+  password: '<%= ENV["DB_PASSWORD"] %>'
