@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   private
 
   def fetch_current_user_id
-    @current_user_id = cookies.signed[:user] ? cookies.signed[:user][:id] : null
+    @current_user_id = cookies.signed[:user] ? cookies.signed[:user][:id] : nil
   end
 
   def cookie_hash(user)
