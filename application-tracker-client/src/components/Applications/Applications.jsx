@@ -1,3 +1,4 @@
+import React from 'react'
 import ApplicationsCreateButton from "./ApplicationsCreateButton";
 import ApplicationsIndex from "./ApplicationsIndex";
 

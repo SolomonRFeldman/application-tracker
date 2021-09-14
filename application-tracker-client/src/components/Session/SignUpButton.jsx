@@ -1,3 +1,4 @@
+import React from 'react'
 import ModalButton from '../Modal/ModalButton'
 import SignUpForm from './SignUpForm'
 
