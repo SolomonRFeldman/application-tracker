@@ -3,7 +3,7 @@ import { Form, Modal, Button } from 'react-bootstrap'
 import { postRequest } from '../../apiRequests'
 
 export default function SignUpForm({ show, handleClose, setCurrentUser }) {
-  const [formData, setFormData] = useState({ email: '', password: '' })
+  const [formData, setFormData] = useState({ username: '', email: '', password: '', password_confirmation: '' })
   const handleChange = event => setFormData({ ...formData, [event.target.id]: event.target.value })
 
   const handleSubmit = event => {

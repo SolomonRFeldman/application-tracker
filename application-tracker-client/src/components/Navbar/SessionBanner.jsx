@@ -1,14 +1,7 @@
-import { useEffect, useState } from 'react'
-import { getRequest } from '../../apiRequests'
 import NavbarBody from './NavbarBody'
 import SignInBanner from '../Session/SignInBanner'
 
-export default function SessionBanner() {
-  const [currentUser, setCurrentUser] = useState()
-
-  useEffect(() => {
-    getRequest('/current').then(({user}) => setCurrentUser(user))
-  }, [])
+export default function SessionBanner({currentUser, setCurrentUser}) {
 
   return(
     currentUser ?
