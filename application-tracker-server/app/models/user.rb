@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensative: false }
 
   def session_info
-    self.attributes.slice('username')
+    self.attributes.slice('id', 'username')
   end
   
   class << self
