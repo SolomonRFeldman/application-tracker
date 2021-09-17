@@ -15,5 +15,9 @@ export const getRequest = (url) => fetch(API_ENDPOINT + url, configObj("GET"))
 const configObjWithBody = (method, body) => {
   return { ...configObj(method), body: JSON.stringify(body) }
 }
+
 export const postRequest = (url, body) => fetch(API_ENDPOINT + url, configObjWithBody("POST", body))
+  .then(response => response.json())
+
+export const patchRequest = (url, body) => fetch(API_ENDPOINT + url, configObjWithBody("PATCH", body))
   .then(response => response.json())
