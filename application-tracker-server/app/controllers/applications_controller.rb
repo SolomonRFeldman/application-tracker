@@ -12,10 +12,18 @@ class ApplicationsController < ApplicationController
       application.save ? render(json: application.to_json, status: 200) : render(json: { errors: application.errors }, status: 400)
     end
   end
+
+  def update
+    application = Application.find_by(id: params[:id])
+
+    if application && @current_user_id == application.user_id
+      application.update(application_params) ? render(json: { application: application }, status: 200) : render(json: { errors: application.errors }, status: 400)
+    end
+  end
   
   private
 
   def application_params
-    params.require(:application).permit(:organization_name, :purpose, :url, :date_applied)
+    params.require(:application).permit(:organization_name, :purpose, :url, :date_applied, :status)
   end
 end
