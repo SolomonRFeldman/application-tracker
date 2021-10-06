@@ -90,4 +90,16 @@ RSpec.describe User, type: :model do
       expect(subject).to eq(nil)
     end
   end
+
+  context 'when sesssion info is called on the user a user' do
+    let(:subject) { valid_user.session_info }
+
+    it "returns a hash that contains the id" do
+      expect(subject["id"]).to eq(valid_user.id)
+    end
+
+    it "returns a hash that contains the username" do
+      expect(subject["username"]).to eq(valid_user.username)
+    end
+  end
 end
