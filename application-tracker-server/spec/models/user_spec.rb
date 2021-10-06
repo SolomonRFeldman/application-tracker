@@ -58,4 +58,36 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'when authenticate is called on the class with a valid email and password' do
+    before do
+      valid_user
+    end
+    let(:subject) { User.authenticate(email: 'Test@123.com', password: '123') }
+
+    it 'returns the user' do
+      expect(subject).to eq(valid_user)
+    end
+  end
+
+  context 'when authenticate is called on the class with a valid email but invalid password' do
+    before do
+      valid_user
+    end
+    let(:subject) { User.authenticate(email: 'Test@123.com', password: '321') }
+
+    it 'returns nil' do
+      expect(subject).to eq(nil)
+    end
+  end
+
+  context 'when authenticate is called on the class with a invalid email' do
+    before do
+      valid_user
+    end
+    let(:subject) { User.authenticate(email: 'est@123.com', password: '123') }
+
+    it 'returns nil' do
+      expect(subject).to eq(nil)
+    end
+  end
 end
