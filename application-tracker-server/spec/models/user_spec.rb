@@ -15,33 +15,28 @@ RSpec.describe User, type: :model do
   it 'is invalid with a mismatched password' do
     expect(build(:valid_user, password_confirmation: '321')).to_not be_valid
   end
-
   it 'is invalid with a blank password' do
-    expect(build(:valid_user, password: '')).to_not be_valid
+    expect(build(:valid_user, password: '', password_confirmation: '')).to_not be_valid
+  end
+  it 'is invalid with a null password' do
+    expect(build(:valid_user, password: nil, password_confirmation: nil)).to_not be_valid
+  end
+  it 'is invalid with a null password_confirmation' do
+    expect(build(:valid_user, password_confirmation: nil)).to_not be_valid
   end
 
   it 'is invalid with a null email' do
     expect(build(:valid_user, email: nil)).to_not be_valid
   end
-
-  it 'is invalid with a null username' do
-    expect(build(:valid_user, username: nil)).to_not be_valid
-  end
-
-  it 'is invalid with a null password' do
-    expect(build(:valid_user, password: nil)).to_not be_valid
-  end
-
   it 'is invalid with a blank email' do
     expect(build(:valid_user, email: '')).to_not be_valid
   end
 
+  it 'is invalid with a null username' do
+    expect(build(:valid_user, username: nil)).to_not be_valid
+  end
   it 'is invalid with a blank username' do
     expect(build(:valid_user, username: '')).to_not be_valid
-  end
-
-  it 'is invalid with a blank password' do
-    expect(build(:valid_user, password: '')).to_not be_valid
   end
 
   context 'when another user has taken an email' do
@@ -94,11 +89,11 @@ RSpec.describe User, type: :model do
   context 'when sesssion info is called on the user a user' do
     let(:subject) { valid_user.session_info }
 
-    it "returns a hash that contains the id" do
+    it 'returns a hash that contains the id' do
       expect(subject["id"]).to eq(valid_user.id)
     end
 
-    it "returns a hash that contains the username" do
+    it 'returns a hash that contains the username' do
       expect(subject["username"]).to eq(valid_user.username)
     end
   end
