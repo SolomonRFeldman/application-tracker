@@ -28,7 +28,7 @@ describe 'Users Features', type: :feature do
 
     it 'creates a signed cookie with the user id' do
       cookies = ActionDispatch::Request.new(page.driver.request.env).cookie_jar
-      expect(cookies.signed['user'][:id]).to eq(find_valid_user.id)
+      expect(cookies.signed[:user][:id]).to eq(find_valid_user.id)
     end
   end
 
