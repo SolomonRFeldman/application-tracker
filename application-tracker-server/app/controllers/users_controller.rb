@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save 
       cookies.signed[:user] = cookie_hash(user)
-      render( json: { user: user.session_info }, status: 200 )
+      render( json: user.session_info, status: 200 )
     else
       render( json: { errors: user.errors }, status: 400 )
     end
