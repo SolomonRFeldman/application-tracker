@@ -43,6 +43,7 @@ describe 'Users Features', type: :feature do
       resp = JSON.parse(page.body)
       expect(resp).to include('errors')
       expect(resp['errors'].first['title']).to eq('Invalid email or password')
+      expect(resp['errors'].first['status']).to eq('401')
     end
   end
 end

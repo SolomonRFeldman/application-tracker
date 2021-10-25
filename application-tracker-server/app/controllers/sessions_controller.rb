@@ -1,11 +1,10 @@
 class SessionsController < ApplicationController
-
   def create
     if user = User.authenticate(email: session_params[:email], password: session_params[:password])
       cookies.signed[:user] = cookie_hash(user)
       render json: user.session_info
     else
-      render json: { errors: [{ title: 'Invalid email or password' }] }, status: 401
+      render json: { errors: [{ title: 'Invalid email or password', status: '401' }] }, status: 401
     end
   end
 
@@ -22,9 +21,8 @@ class SessionsController < ApplicationController
   end
 
   private
-  
+
   def session_params
     params.require(:user).permit(:email, :password)
   end
-
 end
