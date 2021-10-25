@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
   def create
     if user = User.authenticate(email: session_params[:email], password: session_params[:password])
       cookies.signed[:user] = cookie_hash(user)
-      render json: { user: user.session_info }
+      render json: user.session_info
     else
-      render json: { authentication_error: true }, status: 400
+      render json: { errors: [{ title: 'Invalid email or password' }] }, status: 401
     end
   end
 
