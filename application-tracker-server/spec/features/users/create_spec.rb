@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Users Features', type: :feature do
   let(:valid_user_hash) { attributes_for(:valid_user) }
+  let(:find_valid_user) { User.find_by(username: valid_user_hash[:username]) }
 
   context 'when valid user data is posted to signup' do
     before do
@@ -18,8 +19,13 @@ describe 'Users Features', type: :feature do
 
     it 'returns the user id and username in a json format' do
       resp = JSON.parse(page.body)
-      expect(resp['id']).to eq(User.find_by(username: valid_user_hash[:username]).id)
+      expect(resp['id']).to eq(find_valid_user.id)
       expect(resp['username']).to eq(valid_user_hash[:username])
+    end
+
+    it 'creates a signed cookie with the user id' do
+      cookies = ActionDispatch::Request.new(page.driver.request.env).cookie_jar
+      expect(cookies.signed['user'][:id]).to eq(find_valid_user.id)
     end
   end
 
