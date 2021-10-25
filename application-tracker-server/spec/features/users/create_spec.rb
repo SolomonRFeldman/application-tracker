@@ -22,4 +22,33 @@ describe 'Users Features', type: :feature do
       expect(resp['username']).to eq(valid_user_hash[:username])
     end
   end
+
+  context 'when invalid user data is posted to signup' do
+    let(:invalid_user_hash) do
+      {
+        username: '',
+        email: '',
+        password: '',
+        password_confirmation: nil
+      }
+    end
+    let(:errored_user) { User.create(invalid_user_hash).errors }
+
+    before do
+      page.driver.submit :post, signup_path, user: invalid_user_hash
+    end
+
+    it 'returns status 400' do
+      expect(page.status_code).to eq(400)
+    end
+
+    it 'returns the creation errors' do
+      resp = JSON.parse(page.body)
+      expect(resp).to include('errors')
+      expect(resp['errors']['username']).to eq(errored_user[:username])
+      expect(resp['errors']['email']).to eq(errored_user[:email])
+      expect(resp['errors']['password']).to eq(errored_user[:password])
+      expect(resp['errors']['password_confirmation']).to eq(errored_user[:password_confirmation])
+    end
+  end
 end
