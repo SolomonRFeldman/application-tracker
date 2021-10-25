@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe 'Users Features', type: :feature do
+  after do
+    Capybara.current_session.driver.browser.clear_cookies
+  end
+
   let(:valid_user) { create(:valid_user) }
   before do
     valid_user
@@ -10,7 +14,6 @@ describe 'Users Features', type: :feature do
     before do
       page.driver.submit :post, signin_path, user: attributes_for(:valid_user).slice(:email, :password)
     end
-
     it 'returns status 200' do
       expect(page.status_code).to eq(200)
     end
